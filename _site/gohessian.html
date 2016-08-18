@@ -55,7 +55,7 @@
             <section id="folders">
                 <a class="folder_link" href="./Changelog.html">
                     <br style="line-height:25px;">Changelog</a>
-                <a class="folder_selected" href="./GoHessian-For-Dummies.html">
+                <a class="folder_selected" href="./GoHessian.html">
                     <br>Usage
                     <br>Guide</a>
                 <a class="folder_link" href="./index.html">
@@ -80,6 +80,7 @@
               <li><a href="#go-setup">Getting Ready to Go</a></li>
               <li><a href="#install">Installation</a></li>
               <li><a href="#new-go-hess">Creating a New Go Hessian</a></li>
+                <li><a href="#use-hess-serial">Using the GoHessian Serializer</a></li>
             </ol>
 
             <h2>
@@ -148,22 +149,22 @@
             This creates a new instance of GoHessian named gh.  Passing nil to the function creates new maps as the parameters.  If you wish to use your own maps, pass them instead of nil.  gh, the value returned by NewGoHessian, is an interface of type Serializer.  This interface contains two methods, ToBytes and ToObject, the two principle methods that serialization uses.
             </p>
           </ul>
-      <h2><a id = "toBytes" href="#toBytes" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>5. Using the GoHessian Serializer</h2>
-      <p> There are two important methods in the serializer--ToBytes and ToObject--that carry out opposite tasks, which are serializing and deserializing data, respectively. Passing an object to ToBytes will produce a byte array, and passing the byte array to ToObject will produce the original object. Here's an example. Assume we create a struct as such:
+      <h2><a id = "use-hess-serial" href="#use-hess-serial" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>5. Using the GoHessian Serializer</h2>
+      <p> There are two important methods in the serializer--ToBytes and ToObject--that carry out opposite tasks, which are encoding and decoding the data, respectively. Passing an object to ToBytes will produce a byte array, and passing the byte array to ToObject will produce the original object. Assume we create a struct as such:
         <pre><code>
           type Person struct {
             firstName string
             lastName string
         }
         </code></pre>
-      Now, we'll create a Person object and serialize, then deserialize, the object: <!--Here's a link to interfaces in Go: <a href="https://golang.org/doc/effective_go.html#interfaces_and_types">Interfaces in Go</a>:-->
+      Now, we'll create a Person object and encode, then decode, the object: <!--Here's a link to interfaces in Go: <a href="https://golang.org/doc/effective_go.html#interfaces_and_types">Interfaces in Go</a>:-->
       <pre><code>
         person := Person{"John","Doe"}
         gh := NewGoHessian(nil, nil)
         byteArray, _ := gh.ToBytes(p)
         same_person, _ := gh.ToObject(bt)
       </code></pre>
-      Here, <code>person</code> is an instance of struct Person, <code>gh</code> is our GoHessian instance, and <code>byteArray</code> is the value of the serialized person. The <code>byteArray</code> is passed to <code>ToObject</code>, which returns an object that has the same value as <code>person</code>.
+      Here, <code>person</code> is an instance of struct Person, <code>gh</code> is our GoHessian instance, and <code>byteArray</code> is the value of the Person after it has been encoded. To decode the Person, the <code>byteArray</code> is passed to <code>ToObject</code>, which returns an object that has the same value as <code>person</code>.
       </p>
       </section>
   </div>
