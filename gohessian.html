@@ -36,7 +36,7 @@
             content: "";
         }
     </style>
-    <title>GoHessian For Dummies</title>
+    <title>GoHessian</title>
 </head>
 
 <body>
@@ -80,8 +80,6 @@
               <li><a href="#go-setup">Getting Ready to Go</a></li>
               <li><a href="#install">Installation</a></li>
               <li><a href="#new-go-hess">Creating a New Go Hessian</a></li>
-              <li><a href="#toBytes">Using ToBytes</a></li>
-              <li><a href="#toObject">Using ToObject</a></li>
             </ol>
 
             <h2>
@@ -150,29 +148,23 @@
             This creates a new instance of GoHessian named gh.  Passing nil to the function creates new maps as the parameters.  If you wish to use your own maps, pass them instead of nil.  gh, the value returned by NewGoHessian, is an interface of type Serializer.  This interface contains two methods, ToBytes and ToObject, the two principle methods that serialization uses.
             </p>
           </ul>
-      <h2><a id = "toBytes" href="#toBytes" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>5. Using ToBytes</h2>
-      <p>
-        The ToBytes method is for the transformation of input into a byte array, serializing it.  Using it is very simple.  Before we can use the method, we must create something to pass to it.  Assume we create a struct like such:
+      <h2><a id = "toBytes" href="#toBytes" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>5. Using the GoHessian Serializer</h2>
+      <p> There are two important methods in the serializer--ToBytes and ToObject--that carry out opposite tasks, which are serializing and deserializing data, respectively. Passing an object to ToBytes will produce a byte array, and passing the byte array to ToObject will produce the original object. Here's an example. Assume we create a struct as such:
         <pre><code>
-          type Person struct{
-          firstName string
-          lastName string
-          }
+          type Person struct {
+            firstName string
+            lastName string
+        }
         </code></pre>
-      Now we can use that as the data to pass to our ToBytes method.  ToBytes takes an interface as a parameter.  <a href="https://golang.org/doc/effective_go.html#interfaces_and_types">Interfaces in Go</a> are a powerful tool, capable of accepting any input of any type.  ToBytes returns a byte array value.  To use the ToBytes, use the following code:
+      Now, we'll create a Person object and serialize, then deserialize, the object: <!--Here's a link to interfaces in Go: <a href="https://golang.org/doc/effective_go.html#interfaces_and_types">Interfaces in Go</a>:-->
       <pre><code>
-        byteArray, _ := gh.ToBytes(testPerson)
+        person := Person{"John","Doe"}
+        gh := NewGoHessian(nil, nil)
+        byteArray, _ := gh.ToBytes(p)
+        same_person, _ := gh.ToObject(bt)
       </code></pre>
-      Where <code>byteArray</code> is the return value, <code>gh</code> is our GoHessian instance, and <code>testPerson</code> is an instance of struct Person.  Now that we have a byte array, we can deserializer it using ToObject, or use it as for other purposes.
+      Here, <code>person</code> is an instance of struct Person, <code>gh</code> is our GoHessian instance, and <code>byteArray</code> is the value of the serialized person. The <code>byteArray</code> is passed to <code>ToObject</code>, which returns an object that has the same value as <code>person</code>.
       </p>
-  <h2><a id = "toObject" href="#toObject" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>6. Using ToObject</h2>
-  <p>
-    The ToObject method takes a byte array and transforms it from a byte array into an object, deserializing it.  Like ToBytes, use is simple.  To use this method, use this code:
-    <pre><code>
-      result, _ := gh.ToObject(byteArray)
-    </code></pre>
-  Where <code>result</code> is the deserialized object, <code>gh</code> is the instance of GoHessian, and <code>byteArray</code> is the byte array from ToBytes.
-  </p>
       </section>
   </div>
     <!-- FOOTER  -->
