@@ -15,10 +15,10 @@ This is a serializer that uses the Hessian protocol, implemented using the Go la
 	* For more details on how to install Go, click [here](https://golang.org/doc/install "Go installation instructions")
 * Install with `go get github.com/viant/gohessian`
 * All test files can be run with 'go test'
-* User guide is located here: 'http://viant.github.io/gohessian'
+* User guide is located here: http://viant.github.io/gohessian
 
 ## Latest Version
-The latest stable version is CacheStore 1.1.0 CacheStore Code Base: https://github.com/viant/gohessian
+The latest stable version is CacheStore 1.0.0 CacheStore Code Base: https://github.com/viant/gohessian
 
 ## Copyright and Licensing:
 The source code is available under the Apache 2.0 license. We are actively looking for contributors. If you have ideas, code, bug reports, or fixes that you would like to contribute, please do so. Pull requests will be handled by Mickey Hsieh.
