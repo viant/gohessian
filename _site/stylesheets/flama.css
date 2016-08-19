@@ -1,0 +1,166 @@
+/* Font-style: normal */
+@font-face {
+  font-family: 'Flama';
+  src: url("../fonts/Flama-Ultralight.eot"); /* IE9 Compat Modes */
+  src: url("../fonts/Flama-Ultralight.eot?#iefix") format('embedded-opentype'), /* IE6-IE8 */
+       url("../fonts/Flama-Ultralight.woff") format('woff'), /* Modern Browsers */
+       url("../fonts/Flama-Ultralight.svg#font") format('svg'); /* Legacy iOS */
+  font-weight: 100;
+  font-style: normal;
+}
+@font-face {
+  font-family: 'Flama';
+  src: url("../fonts/Flama-Light.eot"); /* IE9 Compat Modes */
+  src: url("../fonts/Flama-Light.eot?#iefix") format('embedded-opentype'), /* IE6-IE8 */
+       url("../fonts/Flama-Light.woff") format('woff'), /* Modern Browsers */
+       url("../fonts/Flama-Light.svg#font") format('svg'); /* Legacy iOS */
+  font-weight: 200;
+  font-style: normal;
+}
+@font-face {
+  font-family: 'Flama';
+  src: url("../fonts/Flama-Book.eot"); /* IE9 Compat Modes */
+  src: url("../fonts/Flama-Book.eot?#iefix") format('embedded-opentype'), /* IE6-IE8 */
+       url("../fonts/Flama-Book.woff") format('woff'), /* Modern Browsers */
+       url("../fonts/Flama-Book.svg#font") format('svg'); /* Legacy iOS */
+  font-weight: 300;
+  font-style: normal;
+}
+@font-face {
+  font-family: 'Flama';
+  src: url("../fonts/Flama-Basic.eot"); /* IE9 Compat Modes */
+  src: url("../fonts/Flama-Basic.eot?#iefix") format('embedded-opentype'), /* IE6-IE8 */
+       url("../fonts/Flama-Basic.woff") format('woff'), /* Modern Browsers */
+       url("../fonts/Flama-Basic.svg#font") format('svg'); /* Legacy iOS */
+  font-weight: normal;
+  font-style: normal;
+}
+@font-face {
+  font-family: 'Flama';
+  src: url("../fonts/Flama-Medium.eot"); /* IE9 Compat Modes */
+  src: url("../fonts/Flama-Medium.eot?#iefix") format('embedded-opentype'), /* IE6-IE8 */
+       url("../fonts/Flama-Medium.woff") format('woff'), /* Modern Browsers */
+       url("../fonts/Flama-Medium.svg#font") format('svg'); /* Legacy iOS */
+  font-weight: 500;
+  font-style: normal;
+}
+@font-face {
+  font-family: 'Flama';
+  src: url("../fonts/Flama-Semibold.eot"); /* IE9 Compat Modes */
+  src: url("../fonts/Flama-Semibold.eot?#iefix") format('embedded-opentype'), /* IE6-IE8 */
+       url("../fonts/Flama-Semibold.woff") format('woff'), /* Modern Browsers */
+       url("../fonts/Flama-Semibold.svg#font") format('svg'); /* Legacy iOS */
+  font-weight: 600;
+  font-style: normal;
+}
+@font-face {
+  font-family: 'Flama';
+  src: url("../fonts/Flama-Bold.eot"); /* IE9 Compat Modes */
+  src: url("../fonts/Flama-Bold.eot?#iefix") format('embedded-opentype'), /* IE6-IE8 */
+       url("../fonts/Flama-Bold.woff") format('woff'), /* Modern Browsers */
+       url("../fonts/Flama-Bold.svg#font") format('svg'); /* Legacy iOS */
+  font-weight: bold;
+  font-style: normal;
+}
+@font-face {
+  font-family: 'Flama';
+  src: url("../fonts/Flama-Extrabold.eot"); /* IE9 Compat Modes */
+  src: url("../fonts/Flama-Extrabold.eot?#iefix") format('embedded-opentype'), /* IE6-IE8 */
+       url("../fonts/Flama-Extrabold.woff") format('woff'), /* Modern Browsers */
+       url("../fonts/Flama-Extrabold.svg#font") format('svg'); /* Legacy iOS */
+  font-weight: 800;
+  font-style: normal;
+}
+@font-face {
+  font-family: 'Flama';
+  src: url("../fonts/Flama-Black.eot"); /* IE9 Compat Modes */
+  src: url("../fonts/Flama-Black.eot?#iefix") format('embedded-opentype'), /* IE6-IE8 */
+       url("../fonts/Flama-Black.woff") format('woff'), /* Modern Browsers */
+       url("../fonts/Flama-Black.svg#font") format('svg'); /* Legacy iOS */
+  font-weight: 900;
+  font-style: normal;
+}
+
+
+/* Font-style: italic */
+@font-face {
+  font-family: 'Flama';
+  src: url("../fonts/Flama-UltralightItalic.eot"); /* IE9 Compat Modes */
+  src: url("../fonts/Flama-UltralightItalic.eot?#iefix") format('embedded-opentype'), /* IE6-IE8 */
+       url("../fonts/Flama-UltralightItalic.woff") format('woff'), /* Modern Browsers */
+       url("../fonts/Flama-UltralightItalic.svg#font") format('svg'); /* Legacy iOS */
+  font-weight: 100;
+  font-style: italic;
+}
+@font-face {
+  font-family: 'Flama';
+  src: url("../fonts/Flama-LightItalic.eot"); /* IE9 Compat Modes */
+  src: url("../fonts/Flama-LightItalic.eot?#iefix") format('embedded-opentype'), /* IE6-IE8 */
+       url("../fonts/Flama-LightItalic.woff") format('woff'), /* Modern Browsers */
+       url("../fonts/Flama-LightItalic.svg#font") format('svg'); /* Legacy iOS */
+  font-weight: 200;
+  font-style: italic;
+}
+@font-face {
+  font-family: 'Flama';
+  src: url("../fonts/Flama-BookItalic.eot"); /* IE9 Compat Modes */
+  src: url("../fonts/Flama-BookItalic.eot?#iefix") format('embedded-opentype'), /* IE6-IE8 */
+       url("../fonts/Flama-BookItalic.woff") format('woff'), /* Modern Browsers */
+       url("../fonts/Flama-BookItalic.svg#font") format('svg'); /* Legacy iOS */
+  font-weight: 300;
+  font-style: italic;
+}
+@font-face {
+  font-family: 'Flama';
+  src: url("../fonts/Flama-BasicItalic.eot"); /* IE9 Compat Modes */
+  src: url("../fonts/Flama-BasicItalic.eot?#iefix") format('embedded-opentype'), /* IE6-IE8 */
+       url("../fonts/Flama-BasicItalic.woff") format('woff'), /* Modern Browsers */
+       url("../fonts/Flama-BasicItalic.svg#font") format('svg'); /* Legacy iOS */
+  font-weight: italic;
+  font-style: italic;
+}
+@font-face {
+  font-family: 'Flama';
+  src: url("../fonts/Flama-MediumItalic.eot"); /* IE9 Compat Modes */
+  src: url("../fonts/Flama-MediumItalic.eot?#iefix") format('embedded-opentype'), /* IE6-IE8 */
+       url("../fonts/Flama-MediumItalic.woff") format('woff'), /* Modern Browsers */
+       url("../fonts/Flama-MediumItalic.svg#font") format('svg'); /* Legacy iOS */
+  font-weight: 500;
+  font-style: italic;
+}
+@font-face {
+  font-family: 'Flama';
+  src: url("../fonts/Flama-SemiboldItalic.eot"); /* IE9 Compat Modes */
+  src: url("../fonts/Flama-SemiboldItalic.eot?#iefix") format('embedded-opentype'), /* IE6-IE8 */
+       url("../fonts/Flama-SemiboldItalic.woff") format('woff'), /* Modern Browsers */
+       url("../fonts/Flama-SemiboldItalic.svg#font") format('svg'); /* Legacy iOS */
+  font-weight: 600;
+  font-style: italic;
+}
+@font-face {
+  font-family: 'Flama';
+  src: url("../fonts/Flama-BoldItalic.eot"); /* IE9 Compat Modes */
+  src: url("../fonts/Flama-BoldItalic.eot?#iefix") format('embedded-opentype'), /* IE6-IE8 */
+       url("../fonts/Flama-BoldItalic.woff") format('woff'), /* Modern Browsers */
+       url("../fonts/Flama-BoldItalic.svg#font") format('svg'); /* Legacy iOS */
+  font-weight: bold;
+  font-style: italic;
+}
+@font-face {
+  font-family: 'Flama';
+  src: url("../fonts/Flama-ExtraboldItalic.eot"); /* IE9 Compat Modes */
+  src: url("../fonts/Flama-ExtraboldItalic.eot?#iefix") format('embedded-opentype'), /* IE6-IE8 */
+       url("../fonts/Flama-ExtraboldItalic.woff") format('woff'), /* Modern Browsers */
+       url("../fonts/Flama-ExtraboldItalic.svg#font") format('svg'); /* Legacy iOS */
+  font-weight: 800;
+  font-style: italic;
+}
+@font-face {
+  font-family: 'Flama';
+  src: url("../fonts/Flama-BlackItalic.eot"); /* IE9 Compat Modes */
+  src: url("../fonts/Flama-BlackItalic.eot?#iefix") format('embedded-opentype'), /* IE6-IE8 */
+       url("../fonts/Flama-BlackItalic.woff") format('woff'), /* Modern Browsers */
+       url("../fonts/Flama-BlackItalic.svg#font") format('svg'); /* Legacy iOS */
+  font-weight: 900;
+  font-style: italic;
+}
