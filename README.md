@@ -16,7 +16,7 @@ This is a serializer that uses the Hessian protocol, implemented using the Go la
 * Install with `go get github.com/viant/gohessian`
 * All test files can be run with 'go test'
 * User guide is located here: 'http://viant.github.io/gohessian'
-* 
+
 ## Latest Version
 The latest stable version is CacheStore 1.1.0 CacheStore Code Base: https://github.com/viant/gohessian
 
