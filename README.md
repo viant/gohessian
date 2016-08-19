@@ -1,6 +1,6 @@
 ## gohessian
 
-This is a serializer that uses the Hessian protocol, implemented using the Go language.  It was designed at [Viant Inc](http://viantinc.com/ "Viant Inc.").  It can be used for many purposes, including with other Viant project, such as [CacheStore](https://github.com/viant/CacheStore "CacheStore").  Use is fairly simple.
+This is a serializer that uses the Hessian protocol, implemented using the Go language.  It was designed at [Viant Inc](http://viantinc.com/ "Viant Inc.").  It can be used for many purposes, including with other open source projects, such as [CacheStore](https://github.com/viant/CacheStore "CacheStore"). Usage is fairly simple.
 
 ## Features:
 * Use of [Hessian](http://hessian.caucho.com/ "Hessian") Binary Web Service protocol
@@ -18,7 +18,7 @@ This is a serializer that uses the Hessian protocol, implemented using the Go la
 * User guide is located here: http://viant.github.io/gohessian
 
 ## Latest Version
-The latest stable version is GoHessian 1.0.0 CacheStore Code Base: https://github.com/viant/gohessian
+The latest stable version is GoHessian 1.0.0. GoHessian Code Base: https://github.com/viant/gohessian
 
 ## Copyright and Licensing:
 The source code is available under the Apache 2.0 license. We are actively looking for contributors. If you have ideas, code, bug reports, or fixes that you would like to contribute, please do so. Pull requests will be handled by Mickey Hsieh.
