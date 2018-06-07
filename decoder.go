@@ -222,6 +222,13 @@ func (d *decoder) readLong(flag int32) (interface{}, error) {
 		i := int64(buf[0])<<56 + int64(buf[1])<<48 + int64(buf[2]) + int64(buf[3]) +
 			int64(buf[4])<<24 + int64(buf[5])<<16 + int64(buf[6])<<8 + int64(buf[7])
 		return i, nil
+	case tag == BC_LONG_INT: //add by zqheng
+		buf := make([]byte, 4)
+		if _, err := io.ReadFull(d.reader, buf); err != nil {
+			return nil, newCodecError("parse integer", err)
+		}
+		i := int32(buf[0])<<24 + int32(buf[1])<<16 + int32(buf[2])<<8 + int32(buf[3])
+		return i, nil
 	default:
 		return nil, newCodecError("long wrong tag " + string(tag))
 	}
