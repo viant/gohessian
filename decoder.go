@@ -15,7 +15,7 @@
  *  * the License.
  *
  */
- 
+
 /*
 decoder implement hessian 2 protocol, It follows java hessian package standard.
 It assume that you using the java name convention
@@ -222,7 +222,7 @@ func (d *decoder) readLong(flag int32) (interface{}, error) {
 		i := int64(buf[0])<<56 + int64(buf[1])<<48 + int64(buf[2]) + int64(buf[3]) +
 			int64(buf[4])<<24 + int64(buf[5])<<16 + int64(buf[6])<<8 + int64(buf[7])
 		return i, nil
-	case tag == BC_LONG_INT: //add by zqheng
+	case tag == BC_LONG_INT: //add by CSE
 		buf := make([]byte, 4)
 		if _, err := io.ReadFull(d.reader, buf); err != nil {
 			return nil, newCodecError("parse integer", err)
@@ -333,7 +333,6 @@ func (d *decoder) readString(flag int32) (interface{}, error) {
 		}
 		return string(data), nil
 	} else {
-		fmt.Println(tag, len, last)
 		return nil, newCodecError("byte3 integer")
 	}
 
@@ -363,6 +362,19 @@ func (d *decoder) getStrLen(tag byte) (int32, error) {
 	default:
 		return -1, newCodecError("getStrLen")
 	}
+}
+func (d *decoder) readInstance2(cls ClassDef) (interface{}, error) {
+	var tmpMemberMap = make(map[string]interface{})
+
+	for i := 0; i < len(cls.FieldName); i++ {
+		fldName := cls.FieldName[i]
+		obj, err := d.ReadObject()
+		if err != nil {
+			fmt.Println("struct error", err)
+		}
+		tmpMemberMap[fldName] = obj
+	}
+	return tmpMemberMap, nil
 }
 
 func (d *decoder) readInstance(typ reflect.Type, cls ClassDef) (interface{}, error) {
@@ -422,7 +434,7 @@ func (d *decoder) readInstance(typ reflect.Type, cls ClassDef) (interface{}, err
 				fmt.Println("struct error", err)
 			}
 			fldValue.Set(reflect.Indirect(s.(reflect.Value)))
-			fmt.Println("s with struct", s)
+			//fmt.Println("s with struct", s)
 		case kind == reflect.Map:
 			//m, _ := d.ReadObject()
 			//fmt.Println("struct map", m)
@@ -465,7 +477,7 @@ func (d *decoder) readMap(value reflect.Value) error {
 			}
 		}
 		vl, err := d.ReadObject()
-		fmt.Println(key, vl)
+		//fmt.Println(key, vl)
 		m.SetMapIndex(reflect.ValueOf(key), reflect.ValueOf(vl))
 	}
 	value.Set(m)
@@ -576,7 +588,7 @@ func (d *decoder) ReadObject() (interface{}, error) {
 		m[key] = value
 		return m, nil
 	case tag == BC_MAP_UNTYPED:
-		m := make(map[interface{}]interface{})
+		m := make(map[string]interface{}) //这里强制只支持key为string的map类型, cse只支持字符串key
 		//read key and value
 		for {
 			key, err := d.ReadObject()
@@ -589,8 +601,7 @@ func (d *decoder) ReadObject() (interface{}, error) {
 				}
 			}
 			value, err := d.ReadObject()
-			fmt.Println(key, value)
-			m[key] = value
+			m[key.(string)] = value
 		}
 	case tag == BC_OBJECT_DEF:
 		//fmt.Println("BC_OBJECT_DEF")
@@ -610,10 +621,12 @@ func (d *decoder) ReadObject() (interface{}, error) {
 		idx := int(i.(int32))
 		clsD := d.clsDefList[idx]
 		typ, ok := d.typMap[clsD.FullClassName]
-		if !ok {
-			return nil, newCodecError("undefine type for "+clsD.FullClassName, err)
+		if !ok { //add by cse
+			return d.readInstance2(clsD)
+			//return nil, newCodecError("undefine type for "+clsD.FullClassName, err)
+		} else {
+			return d.readInstance(typ, clsD)
 		}
-		return d.readInstance(typ, clsD)
 	case (tag >= 0x80 && tag <= 0xbf) || (tag >= 0xc0 && tag <= 0xcf) ||
 		(tag >= 0xd0 && tag <= 0xd7) || (tag == BC_INT):
 		return d.readInt(int32(tag))
@@ -667,10 +680,12 @@ func (d *decoder) ReadObject() (interface{}, error) {
 		i := int(tag - 0x60)
 		clsD := d.clsDefList[i]
 		typ, ok := d.typMap[clsD.FullClassName]
-		if !ok {
-			return nil, newCodecError("undefine type for "+clsD.FullClassName, err)
+		if !ok { //add by cse
+			return d.readInstance2(clsD)
+			//return nil, newCodecError("undefine type for "+clsD.FullClassName, err)
+		} else {
+			return d.readInstance(typ, clsD)
 		}
-		return d.readInstance(typ, clsD)
 
 	case (tag == BC_BINARY || tag == BC_BINARY_CHUNK) || (tag >= 0x20 && tag <= 0x2f):
 		return d.readBinary(int32(tag))
@@ -733,7 +748,7 @@ func (d *decoder) ReadObject() (interface{}, error) {
 			//fmt.Println("j", j, "it", it)
 		}
 		//read the endbyte of list
-		d.readBufByte()
+		//d.readBufByte()  cse 暂时注释掉,dubbo的hessian编码没有这个结尾标记符
 		//fmt.Println("endList", bt)
 		return ary, nil
 	default:
@@ -854,7 +869,6 @@ func (d *decoder) readClassDef() (interface{}, error) {
 	if !ok {
 		return nil, newCodecError("wrong type")
 	}
-	fmt.Println("clsName", clsName)
 	n, err := d.readInt(TAG_READ)
 	if err != nil {
 		return nil, newCodecError("ReadClassDef", err)

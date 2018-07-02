@@ -15,11 +15,10 @@
  *  * the License.
  *
  */
- 
+
 package hessian
 
 import (
-	"fmt"
 	"io"
 	"math"
 	"reflect"
@@ -70,7 +69,10 @@ func (e *encoder) WriteObject(data interface{}) (int, error) {
 	case reflect.Int32:
 		value := data.(int32)
 		return e.writeInt(value)
-	case reflect.Int64:
+	case reflect.Int:
+		value := data.(int)
+		return e.writeInt(int32(value))
+	case reflect.Int64, reflect.Uint64:
 		value := data.(int64)
 		return e.writeLong(value)
 	case reflect.Slice, reflect.Array:
@@ -90,7 +92,7 @@ func (e *encoder) WriteObject(data interface{}) (int, error) {
 	case reflect.Struct:
 		return e.writeInstance(data)
 	}
-	fmt.Println("error WriteObject", data, "kind", typ.Kind(), typ)
+	//fmt.Println("error WriteObject", data, "kind", typ.Kind(), typ)
 	return 0, nil
 }
 
@@ -209,15 +211,13 @@ func (e *encoder) writeString(value string) (int, error) {
 }
 
 func (e *encoder) writeList(data interface{}) (int, error) {
-
 	vv := reflect.ValueOf(data)
 	e.writeBT(BC_LIST_FIXED_UNTYPED)
 	e.writeInt(int32(vv.Len()))
-	fmt.Println("list", vv.Len(), data)
 	for i := 0; i < vv.Len(); i++ {
 		e.WriteObject(vv.Index(i).Interface())
 	}
-	e.writeBT(BC_END)
+	//e.writeBT(BC_END)  //这里先注释掉，dubbo的hessian编码中没有加这个end
 	return vv.Len(), nil
 }
 
@@ -353,7 +353,6 @@ func (e *encoder) writeBT(bs ...byte) (int, error) {
 }
 
 func (e *encoder) writeInstance(data interface{}) (int, error) {
-	fmt.Println("struct", data)
 	typ := reflect.TypeOf(data)
 	vv := reflect.ValueOf(data)
 
@@ -362,9 +361,7 @@ func (e *encoder) writeInstance(data interface{}) (int, error) {
 		clsName = typ.Name()
 		e.nameMap[clsName] = clsName
 	}
-	//fmt.Println("ok",ok, clsName)
 	l, ok := e.existClassDef(clsName)
-	//fmt.Println("ok 2 ->",ok, l)
 	if !ok {
 		l, _ = e.writeClsDef(typ, clsName)
 	}

@@ -15,13 +15,12 @@
  *  * the License.
  *
  */
- 
+
 package hessian
 
 import (
 	"bytes"
 	"fmt"
-	"reflect"
 	"strings"
 	"testing"
 )
@@ -41,14 +40,14 @@ type Box struct {
 type BB struct {
 	Name   string
 	List   []string
-	Mp     map[int32]string
+	Mp     map[string]string
 	Pst    P
 	Number int32
 }
 
 func TestSerilazer(t *testing.T) {
 	ts4 := []string{"t1", "t2", "t3"}
-	mp1 := map[int32]string{1: "test1", 2: "test2", 3: "test3"}
+	mp1 := map[string]string{"1": "test1", "2": "test2", "3": "test3"}
 	p := P{1, 2, 3, "ABC"}
 	bb := BB{"AB", ts4, mp1, p, 4}
 	gh := NewGoHessian(nil, nil)
@@ -57,31 +56,11 @@ func TestSerilazer(t *testing.T) {
 
 }
 
-func TestDecoder_Instance(t *testing.T) {
-	ts4 := []string{"t1", "t2", "t3"}
-	mp1 := map[int32]string{1: "test1", 2: "test2", 3: "test3"}
-	p := P{1, 2, 3, "ABC"}
-	bb := BB{"AB", ts4, mp1, p, 4}
-	br := bytes.NewBuffer(nil)
-	e := NewEncoder(br, nil)
-	e.WriteObject(bb)
-	fmt.Println("e", br)
-	bt := bytes.NewReader(br.Bytes())
-	d := NewDecoder(bt, nil)
-	d.RegisterType("BB", reflect.TypeOf(BB{}))
-	d.RegisterType("P", reflect.TypeOf(P{}))
-	it, err := d.ReadObject()
-	if err != nil {
-		fmt.Println("err", err)
-	}
-	fmt.Println("decode t", it, "bt len", len(br.Bytes()))
-}
-
 func TestEncoder_WriteObject(t *testing.T) {
-	mp2 := make(map[int]string)
-	mp2[1] = "test1"
-	mp2[2] = "test2"
-	mp2[3] = "test3"
+	mp2 := make(map[string]string)
+	mp2["1"] = "test1"
+	mp2["2"] = "test2"
+	mp2["3"] = "test3"
 	br := bytes.NewBuffer(nil)
 	e7 := NewEncoder(br, nil)
 	e7.WriteObject(mp2)
