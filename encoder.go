@@ -276,11 +276,12 @@ func (e *encoder) writeLong(value int64) (int, error) {
 		buf[0] = 'L'
 		buf[1] = byte(value >> 56)
 		buf[2] = byte(value >> 48)
-		buf[3] = byte(value >> 32)
-		buf[4] = byte(value >> 24)
-		buf[5] = byte(value >> 16)
-		buf[6] = byte(value >> 8)
-		buf[7] = byte(value)
+		buf[3] = byte(value >> 40)
+		buf[4] = byte(value >> 32)
+		buf[5] = byte(value >> 24)
+		buf[6] = byte(value >> 16)
+		buf[7] = byte(value >> 8)
+		buf[8] = byte(value)
 	}
 	l, err := e.writer.Write(buf)
 	if err != nil {
