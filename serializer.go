@@ -20,12 +20,15 @@ package hessian
 
 import (
 	"bytes"
+	"io"
 	"reflect"
 )
 
 type Serializer interface {
 	ToBytes(interface{}) ([]byte, error)
 	ToObject([]byte) (interface{}, error)
+	ToObject2(rd io.Reader) (interface{}, error)
+	ToBytes2(object interface{}, wd io.Writer) error
 }
 
 type goHessian struct {
@@ -54,8 +57,21 @@ func (gh *goHessian) ToBytes(object interface{}) ([]byte, error) {
 	}
 }
 
+func (gh *goHessian) ToBytes2(object interface{}, wd io.Writer) error {
+	e := NewEncoder(wd, gh.nameMap)
+	_, err := e.WriteObject(object)
+	return err
+}
+
 func (gh *goHessian) ToObject(ins []byte) (interface{}, error) {
 	btBufs := bytes.NewReader(ins)
+
+	d := NewDecoder(btBufs, gh.typMap)
+	return d.ReadObject()
+}
+
+func (gh *goHessian) ToObject2(rd io.Reader) (interface{}, error) {
+	var btBufs = rd
 	d := NewDecoder(btBufs, gh.typMap)
 	return d.ReadObject()
 }
